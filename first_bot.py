@@ -112,11 +112,16 @@ def main():
                 new_offset = last_update_id + 1
 
         elif last_chat_text.startswith == 'погода':
-            mess = last_chat_text.split()
-            for key, value in UTC_OFFSET.items():
-                if key.lower() == mess:
-                    weather = what_weather(key)
-                    greet_bot.send_message(last_chat_id, weather)
+            try:
+                mess = last_chat_text.split()[1]
+                weather = what_weather(mess)
+                greet_bot.send_message(last_chat_id, weather)
+            except Exception:
+                greet_bot.send_message(last_chat_id, f'Не могу определить погоду в городе {mess}. Попробуй позже.')
+
+
+        else:
+            greet_bot.send_message(last_chat_id, 'Даже не знаю что ответить. Я ещё слишком мало умею((')
 
 if __name__ == '__main__':
     try:
