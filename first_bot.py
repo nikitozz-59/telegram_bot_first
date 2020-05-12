@@ -32,7 +32,7 @@ class BotHandler:
 
 greet_bot = BotHandler('1172370412:AAFjoR8RvgOQby1b0ZzZb9Y2smt3jZMMMKE')
 greetings = ('здравствуй', 'привет', 'ку', 'здорово')
-now = datetime.datetime.now()
+now = datetime.datetime.utcnow()
 
 
 def main():
