@@ -13,5 +13,11 @@ def get_text_messages(message):
         bot.send_message(message.from_user.id, "Я тебя не понимаю. Напиши /help.")
 
 
+def main():
+    bot.polling(none_stop=True, interval=0)
 
-bot.polling(none_stop=True, interval=0)
+if __name__ == '__main__':
+    try:
+        main()
+    except KeyboardInterrupt:
+        exit()
