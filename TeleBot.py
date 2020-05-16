@@ -1,4 +1,5 @@
 import telebot
+import requests
 
 bot = telebot.TeleBot('1172370412:AAFjoR8RvgOQby1b0ZzZb9Y2smt3jZMMMKE')
 

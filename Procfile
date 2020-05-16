@@ -1,1 +1,1 @@
-web: python TeleBot.py
+web: python first_bot.py

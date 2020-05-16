@@ -95,6 +95,7 @@ def main():
         last_chat_text = last_update['message']['text'].lower()
         last_chat_id = last_update['message']['chat']['id']
         last_chat_name = last_update['message']['chat']['first_name']
+        last_chat_text_split = last_chat_text.split()
 
         if last_chat_text in greetings and today == now.day:
                 if 6 <= hour < 12:
@@ -111,17 +112,21 @@ def main():
 
                 new_offset = last_update_id + 1
 
-        elif last_chat_text.startswith == 'погода':
+        elif 'погода' in last_chat_text_split and today == now.day:
+            last_chat_text_split.remove('погода')
+            city = last_chat_text_split[0]
+            weather = what_weather(city)
             try:
-                mess = last_chat_text.split()[1]
-                weather = what_weather(mess)
-                greet_bot.send_message(last_chat_id, weather)
+                greet_bot.send_message(last_chat_id, f'{weather}')
             except Exception:
-                greet_bot.send_message(last_chat_id, f'Не могу определить погоду в городе {mess}. Попробуй позже.')
+                greet_bot.send_message(last_chat_id, f'Не могу определить погоду в городе {city}. Попробуй позже.')
+
+            new_offset = last_update_id + 1
 
 
         else:
             greet_bot.send_message(last_chat_id, 'Даже не знаю что ответить. Я ещё слишком мало умею((')
+            new_offset = last_update_id + 1
 
 if __name__ == '__main__':
     try:
